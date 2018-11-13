@@ -1,0 +1,39 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cmcont
+subjects:
+- kind: ServiceAccount
+  name: cmcont
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: cmcont
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: cmcont
+  labels:
+    k8s-app: cmcont
+rules:
+- apiGroups: [""] 
+  resources:
+  - namespaces
+  - pods
+  - configmaps
+  verbs:
+  - get
+  - watch
+  - list
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cmcont
+  namespace: default
+  labels:
+    k8s-app: cmcont
+---

@@ -1,0 +1,15 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: cmcont
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cmcont
+    spec:
+      serviceAccountName: cmcont
+      containers:
+      - name: cmcont
+        image: dnivra26/cm_cont:0.2
